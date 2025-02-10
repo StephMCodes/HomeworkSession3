@@ -46,12 +46,19 @@ void InputCourseInfo(Course& course, int courseNumber) {
     std::cin >> course.name;
     //remove unwanted characters like the user pressing \n
     std::cin.ignore();
-    //repeat
+
+    //repeat for ints but there is a caveat: error handling!
+    //if user enters a letter, the console freaks out, so we must add extra code
     std::cout << "Enter the midterm grade of the course " << courseNumber << ": ";
     std::cin >> course.midterm;
     std::cin.ignore();
-    //loop while the method returns false
-    while (!IsInRange(course.midterm)) {
+    
+    //loop while the method returns false AND the input is not integer
+    while (!std::cin.good() || !IsInRange(course.midterm)) {
+        //clear console. needs the overloads
+        std::cin.clear();
+        //clear console. needs the overloads
+        std::cin.ignore(INT_MAX, '\n'); 
         //false: display error msg
         std::cout << "Must be an integer between 0 and 100. Please try again: ";
         std::cin >> course.midterm;
@@ -60,7 +67,12 @@ void InputCourseInfo(Course& course, int courseNumber) {
 
     std::cout << "Enter the project grade of the course " << courseNumber << ": ";
     std::cin >> course.project;
-    while (!IsInRange(course.project)) {
+    std::cin.ignore();
+    while (!std::cin.good() || !IsInRange(course.project)) {
+        //clear error state of cin
+        std::cin.clear();
+        //clear console. needs the overloads
+        std::cin.ignore(INT_MAX, '\n');
         std::cout << "Must be an integer between 0 and 100. Please try again: ";
         std::cin >> course.project;
         std::cin.ignore();
@@ -70,7 +82,11 @@ void InputCourseInfo(Course& course, int courseNumber) {
     std::cin >> course.exam;
     std::cin.ignore();
 
-    while (!IsInRange(course.exam)) {
+    while (!std::cin.good() || !IsInRange(course.project)) {
+        //clear error state of cin
+        std::cin.clear();
+        //clear console. needs the overloads
+        std::cin.ignore(INT_MAX, '\n');
         std::cout << "Must be an integer between 0 and 100. Please try again: ";
         std::cin >> course.exam;
         std::cin.ignore();
