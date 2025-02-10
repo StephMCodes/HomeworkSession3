@@ -2,8 +2,25 @@
 //
 
 #include <iostream>
+
+//it seems to be bad practice to use "using std" library (research more)
+
+
+//////////////////////////////////////////////////////////////////////////
+//                              TO DO                                   //
+//Research \n vs endl; and understand when which is better              //
+//Research how to customize the console colours                         //
+//Research error handling                                               //
+//////////////////////////////////////////////////////////////////////////
+
 struct Course
 {
+    //difference between struct and class
+    //members are default public
+    //From Microsoft Learn:
+    //"Structures are value types; classes are reference types" (research more)
+    //"Structures use stack allocation; classes use heap allocation."
+
     std::string name;
     float midterm;
     float exam;
@@ -18,17 +35,24 @@ bool IsInRange(int num)
 
 void CourseToString(Course& course)
 {
+   //use << to insert the variables into the string not + like in csharp
     std::cout << "\nCourse: " << course.name << " Midterm: " << course.midterm << " Exam: " << course.exam << " Project: " << course.project << "\n";
 }
 
 void InputCourseInfo(Course& course, int courseNumber) {
-    std::cout << "Enter the name of the course " << courseNumber << ": ";
+    //we output a message
+    std::cout << "\nEnter the name of the course " << courseNumber << ": ";
+    //take input
     std::cin >> course.name;
+    //remove unwanted characters like the user pressing \n
     std::cin.ignore();
+    //repeat
     std::cout << "Enter the midterm grade of the course " << courseNumber << ": ";
     std::cin >> course.midterm;
     std::cin.ignore();
+    //loop while the method returns false
     while (!IsInRange(course.midterm)) {
+        //false: display error msg
         std::cout << "Must be an integer between 0 and 100. Please try again: ";
         std::cin >> course.midterm;
         std::cin.ignore();
@@ -55,6 +79,7 @@ void InputCourseInfo(Course& course, int courseNumber) {
 int main()
 {
     std::cout << "Hello World! This is my C++ classwork!\n";
+    //we need a const for the size of an array
     const int nbUserCourses = 3;
     Course userCourses[nbUserCourses];
     //loop for each possible course
