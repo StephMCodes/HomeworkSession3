@@ -34,6 +34,7 @@ struct Student
 {
     std::string name;
     int id;
+    //double grade;
     double* grades;
 };
 
@@ -201,6 +202,24 @@ int main()
         /*for (int i = 0; i < nbUserCourses; i++)
         {
         }*/
+
+        //for (int j = 0; j < numSubjects; ++j) {
+        //    std::cout << "Enter grade for subject " << j + 1 << ": ";
+        //    std::cin >> StudentsArray[i].grade;
+        //    std::cin.ignore();
+
+        //    //loop while the method returns false AND the input is not integer
+        //    while (!std::cin.good() || !IsInRange(numSubjects)) {
+        //        //clear console. needs the overloads
+        //        std::cin.clear();
+        //        //clear console. needs the overloads
+        //        std::cin.ignore(INT_MAX, '\n');
+        //        //false: display error msg
+        //        std::cout << "Must be an integer between 0 and 100. Please try again: ";
+        //        std::cin >> numSubjects;
+        //        std::cin.ignore();
+        //    }
+        //}
     }
     //display student info
     for (int i = 0; i < numStudents; i++)
