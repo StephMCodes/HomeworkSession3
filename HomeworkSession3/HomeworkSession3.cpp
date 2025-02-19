@@ -11,7 +11,8 @@
 //Research \n vs endl; and understand when which is better              //
 //Turn the int check into a function
 // Make more checks so its not all 1-100                                                              //
-//Research error handling                                               //
+//Research error handling                   
+//HOW TO DELETE ARRAYS AND WHATS INSIDE                                 //
 //////////////////////////////////////////////////////////////////////////
 
 struct Course
@@ -191,10 +192,37 @@ int main()
 
     //dynamic allocation of a pointer on student array
     //RESEARCH MORE
-    Student* students = new Student[numStudents];
+    Student* StudentsArray = new Student[numStudents];
 
     //dynamic heap array
-    Course* subjects = new Course[numSubjects];
+    Course* SubjectsArray = new Course[numSubjects];
+
+
+    //input student info
+    for (int i = 0; i < numStudents; i++)
+    {
+        InputStudentInfo(StudentsArray[i]);
+    }
+    //display student info
+    for (int i = 0; i < numStudents; i++)
+    {
+        StudentToString(StudentsArray[i]);
+    }
+
+    //memory cleanup
+    for (int i = 0; i < numStudents; ++i)
+    {
+       // delete[] StudentsArray;
+       // delete[] SubjectsArray;
+        //RESEARCH
+    }
+
+
+
+
+
+
+
 
     //reading invalid data error: RESEARCH
     ////loop for each possible course
