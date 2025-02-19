@@ -9,9 +9,9 @@
 //////////////////////////////////////////////////////////////////////////
 //                              TO DO                                   //
 //Research \n vs endl; and understand when which is better              //
-//Turn the int check into a function
-// Make more checks so its not all 1-100                                                              //
-//Research error handling                   
+//Turn the int check into a function                                    //
+// Make more checks so its not all 1-100                                //                              //
+//Research error handling                                               //
 //HOW TO DELETE ARRAYS AND WHATS INSIDE                                 //
 //////////////////////////////////////////////////////////////////////////
 
@@ -128,21 +128,17 @@ void InputStudentInfo(Student& student) {
         std::cin >> student.id;
         std::cin.ignore();
     }
-  
 }
 
 void StudentToString(Student& student)
 {
     std::cout << "\nName: " << student.name << " ID: " << student.id;
-
 }
-
 
 int main()
 {
     int numStudents;
     int numSubjects;
-   
     
     std::cout << "Hello World! This is my C++ classwork!\n";
     //we need a const for the size of an array
@@ -202,6 +198,9 @@ int main()
     for (int i = 0; i < numStudents; i++)
     {
         InputStudentInfo(StudentsArray[i]);
+        /*for (int i = 0; i < nbUserCourses; i++)
+        {
+        }*/
     }
     //display student info
     for (int i = 0; i < numStudents; i++)
