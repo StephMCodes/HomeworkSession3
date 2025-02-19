@@ -9,7 +9,8 @@
 //////////////////////////////////////////////////////////////////////////
 //                              TO DO                                   //
 //Research \n vs endl; and understand when which is better              //
-//Research how to customize the console colours                         //
+//Turn the int check into a function
+// Make more checks so its not all 1-100                                                              //
 //Research error handling                                               //
 //////////////////////////////////////////////////////////////////////////
 
@@ -25,6 +26,14 @@ struct Course
     float midterm;
     float exam;
     float project;
+};
+
+//for next assignment create a student struct
+struct Student
+{
+    std::string name;
+    int id;
+    double* grades;
 };
 
 bool IsInRange(int num)
@@ -92,8 +101,48 @@ void InputCourseInfo(Course& course, int courseNumber) {
         std::cin.ignore();
     }
 }
+
+void InputStudentInfo(Student& student) {
+    //we output a message
+    std::cout << "\nEnter the name of a new student: ";
+    //take input
+    std::cin >> student.name;
+    //remove unwanted characters like the user pressing \n
+    std::cin.ignore();
+
+    //repeat for ints but there is a caveat: error handling!
+    //if user enters a letter, the console freaks out, so we must add extra code
+    std::cout << "Enter the ID (1-100) number of " << student.name << ": ";
+    std::cin >> student.id;
+    std::cin.ignore();
+
+    //loop while the method returns false AND the input is not integer
+    while (!std::cin.good() || !IsInRange(student.id)) {
+        //clear console. needs the overloads
+        std::cin.clear();
+        //clear console. needs the overloads
+        std::cin.ignore(INT_MAX, '\n');
+        //false: display error msg
+        std::cout << "Must be an integer between 0 and 100. Please try again: ";
+        std::cin >> student.id;
+        std::cin.ignore();
+    }
+  
+}
+
+void StudentToString(Student& student)
+{
+    std::cout << "\nName: " << student.name << " ID: " << student.id;
+
+}
+
+
 int main()
 {
+    int numStudents;
+    int numSubjects;
+   
+    
     std::cout << "Hello World! This is my C++ classwork!\n";
     //we need a const for the size of an array
     const int nbUserCourses = 3;
@@ -106,6 +155,56 @@ int main()
         //display courses
         CourseToString(userCourses[i]);
     }
+
+    //ASSIGNMENT 2
+    std::cout << "Enter the number of students (0-100): ";
+    std::cin >> numStudents;
+    std::cin.ignore();
+
+    //loop while the method returns false AND the input is not integer
+    while (!std::cin.good() || !IsInRange(numStudents)) {
+        //clear console. needs the overloads
+        std::cin.clear();
+        //clear console. needs the overloads
+        std::cin.ignore(INT_MAX, '\n');
+        //false: display error msg
+        std::cout << "Must be an integer between 0 and 100. Please try again: ";
+        std::cin >> numStudents;
+        std::cin.ignore();
+    }
+
+    std::cout << "Enter the number of subjects (0-100): ";
+    std::cin >> numSubjects;
+    std::cin.ignore();
+
+    //loop while the method returns false AND the input is not integer
+    while (!std::cin.good() || !IsInRange(numSubjects)) {
+        //clear console. needs the overloads
+        std::cin.clear();
+        //clear console. needs the overloads
+        std::cin.ignore(INT_MAX, '\n');
+        //false: display error msg
+        std::cout << "Must be an integer between 0 and 100. Please try again: ";
+        std::cin >> numSubjects;
+        std::cin.ignore();
+    }
+
+    //dynamic allocation of a pointer on student array
+    //RESEARCH MORE
+    Student* students = new Student[numStudents];
+
+    //dynamic heap array
+    Course* subjects = new Course[numSubjects];
+
+    //reading invalid data error: RESEARCH
+    ////loop for each possible course
+    //for (int i = 0; i < numSubjects; i++)
+    //{
+    //    //get input of courses
+    //    InputCourseInfo(subjects[i], i + 1);
+    //    //display courses
+    //    CourseToString(subjects[i]);
+    //}
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
