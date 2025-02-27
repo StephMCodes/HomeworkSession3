@@ -55,7 +55,7 @@ public: int currentYear, destinationYear;
       {
           std::cout << "Enter the destination year for the TARDIS: \n";
           std::cin >> this->destinationYear;
-          while (!std::cin.good() && this->destinationYear >= 1900 && this->destinationYear <= 2100) {
+          while (!std::cin.good() || this->destinationYear <= 1900 || this->destinationYear >= 2100) {
               //clear error state of cin
               std::cin.clear();
               //clear console. needs the overloads
@@ -179,7 +179,7 @@ void InputStudentInfo(Student& student) {
 
 void StudentToString(Student& student)
 {
-    std::cout << "\nName: " << student.name << " ID: " << student.id;
+    std::cout << "\nName: " << student.name << " ID: " << student.id << std::endl;
 }
 
 int main()
@@ -281,8 +281,15 @@ int main()
         //RESEARCH
     }
 
-
-
+    //ASSIGNMENT 3
+    //create instance of timetravel object
+    TimeTravel tardis(0, 0);
+    //ask for destination and check if its valid
+    tardis.SetDestination();
+    //change current year to destination
+    tardis.Travel();
+    //display a small message based on your current year
+    tardis.Explore(tardis.currentYear);
 
 
 
