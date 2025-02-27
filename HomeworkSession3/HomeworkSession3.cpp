@@ -38,6 +38,52 @@ struct Student
     double* grades;
 };
 
+class TimeTravel
+{
+public: int currentYear, destinationYear;
+
+      TimeTravel(int currentYear, int destinationYear)
+          : currentYear(currentYear), destinationYear(destinationYear)
+      {
+          //set to default value
+          this->currentYear = 2025;
+          //for now they can be the same
+          this->destinationYear = this->currentYear;
+      }
+
+      void SetDestination()
+      {
+          std::cout << "Enter the destination year for the TARDIS: \n";
+          std::cin >> this->destinationYear;
+          while (!std::cin.good() && this->destinationYear >= 1900 && this->destinationYear <= 2100) {
+              //clear error state of cin
+              std::cin.clear();
+              //clear console. needs the overloads
+              std::cin.ignore(INT_MAX, '\n');
+              std::cout << "Must be an integer that is valid (1900-2100). Please try again: \n";
+              std::cin >> this->destinationYear;
+              std::cin.ignore();
+          }
+      }
+
+      void Travel()
+      {
+          std::cout << "Travelling to the year... " << this->destinationYear << "!\n";
+          this->currentYear = this->destinationYear;
+      }
+
+      void Explore(int currentYear)
+      {
+          if (currentYear < 2000)
+          {
+              std::cout << "Exploring the year... " << destinationYear << "... you seem to like the past!\n";
+
+          }
+          else {
+              std::cout << "Exploring the year... " << destinationYear << "... you seem to like the future!\n";
+          }
+      }
+};
 bool IsInRange(int num)
 {
     return (num >= 0 && num <= 100);
