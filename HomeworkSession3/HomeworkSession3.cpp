@@ -2,6 +2,7 @@
 //
 
 #include <iostream>
+#include <windows.h>
 
 //it seems to be bad practice to use "using std" library (research more)
 
@@ -13,6 +14,8 @@
 // Make more checks so its not all 1-100                                //                              //
 //Research error handling                                               //
 //HOW TO DELETE ARRAYS AND WHATS INSIDE                                 //
+//Binary search trees and complexity level                              //
+//Study recursion                                                       //
 //////////////////////////////////////////////////////////////////////////
 
 struct Course
@@ -182,8 +185,45 @@ void StudentToString(Student& student)
     std::cout << "\nName: " << student.name << " ID: " << student.id << std::endl;
 }
 
+int sumArray(int arr[], int n) {
+    int sum = 0;
+    for (int i = 0; i < n; i++) {
+        sum += arr[i];
+    }
+    return sum;
+}
+void findDuplicates(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (arr[i] == arr[j]) {
+                std::cout << "Duplicate: " << arr[i] << std::endl;
+            }
+        }
+    }
+}
+
 int main()
 {
+    //ASSIGNMENT 4
+    LARGE_INTEGER start, end, freq;
+    double elapsedTime;
+
+    QueryPerformanceFrequency(&freq);
+    QueryPerformanceCounter(&start);
+    //ex 1
+    /*int arr[] = {1, 2, 3, 4, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    cout << "Sum: " << sumArray(arr, n) << endl;*/
+    //ex2
+    int arr[] = { 1, 2, 3, 2, 5, 5,5,5,4,4,3,2,1,1 };
+    int n = sizeof(arr) / sizeof(arr[0]);
+    findDuplicates(arr, n);
+
+    QueryPerformanceCounter(&end);
+    elapsedTime = static_cast<double>(end.QuadPart - start.QuadPart) / freq.QuadPart;
+    std::cout << "Time: " << elapsedTime << std::endl;
+    return 0;
+
     int numStudents;
     int numSubjects;
     
@@ -290,6 +330,8 @@ int main()
     tardis.Travel();
     //display a small message based on your current year
     tardis.Explore(tardis.currentYear);
+
+    //ASSIGNMENT 4
 
 
 
