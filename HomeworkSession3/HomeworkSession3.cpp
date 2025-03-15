@@ -202,6 +202,20 @@ void findDuplicates(int arr[], int n) {
     }
 }
 
+int binarySearch(int arr[], int left, int right, int target) {
+    while (left <= right) {
+        //get the middle value to see if the searched value is higher or lower
+        int mid = left + (right - left) / 2; //we truncate the value (no decimals)
+        //check if its actually the middle value if so return it (best case scenario)
+        if (arr[mid] == target) return mid;
+        //else if its above the midpoint, adjust the left so we start there next loop
+        else if (arr[mid] < target) left = mid + 1;
+        //else if under midpoint, adjust likewise
+        else right = mid - 1;
+    }
+    return -1; //return false if its not there
+}
+
 int main()
 {
     //ASSIGNMENT 4
@@ -210,14 +224,62 @@ int main()
 
     QueryPerformanceFrequency(&freq);
     QueryPerformanceCounter(&start);
-    //ex 1
+    //COMPLEXITY EXAMPLE 1
     /*int arr[] = {1, 2, 3, 4, 5};
     int n = sizeof(arr) / sizeof(arr[0]);
     cout << "Sum: " << sumArray(arr, n) << endl;*/
+    //RESULTS
+    /*Time complexity: O(n) linear time(more values / complexity = more time)
+        Different test values :
+        Sum 15 : Time taken : 0.0004721 to 0.0008021
+        Sum : 55 Time taken : 0.0016786
+        Sum : 210 Time taken : 0.0017592
+        Growth Observations : it grows the more values
+        we have in the array to add*/
+
+
     //ex2
-    int arr[] = { 1, 2, 3, 2, 5, 5,5,5,4,4,3,2,1,1 };
+   /* int arr[] = { 1, 2, 3, 2, 5, 5,5,5,4,4,3,2,1,1 };
     int n = sizeof(arr) / sizeof(arr[0]);
-    findDuplicates(arr, n);
+    findDuplicates(arr, n);*/
+    //RESULTS
+//    Time complexity using  Big o annotation : quadratic
+//        Different test values :
+//Duplicate: 1
+//Duplicate : 2
+//Time : 0.0018899
+//Duplicate : 1
+//Duplicate : 1
+//Duplicate : 2
+//Duplicate : 2
+//Duplicate : 3
+//Duplicate : 2
+//Duplicate : 5
+//Duplicate : 5
+//Duplicate : 5
+//Duplicate : 5
+//Duplicate : 5
+//Duplicate : 5
+//Duplicate : 4
+//Duplicate : 1
+//Time : 0.0074998
+//Growth Observations : simple nested loop
+
+    //ex3
+    int arr[] = { 1, 2, 3, 4, 5,6, 7,8, 9,10, 11,12,13,14,15,16,17,18,19,20,21,22,23,244,25,26,27,28,29,30,31,32,34,35,36,37,38,39,40 };
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int target = 23;
+    int index = binarySearch(arr, 0, n - 1, target);
+    if (index != -1) std::cout << "Found at index: " << index << std::endl;
+    else std::cout << "Not found" << std::endl;
+
+    //COMPLEXITY RESULT
+    //big o: o(log) (unless found on first try o(1))
+    //it gets more constant the bigger the number because we use halving technique
+    //Found at index : 3, Time : 0.0005498
+    //Not found, Time: 0.0009344
+    //Found at index : 17, Time : 0.0015286
+    //Found at index : 22 Time : 0.0012976
 
     QueryPerformanceCounter(&end);
     elapsedTime = static_cast<double>(end.QuadPart - start.QuadPart) / freq.QuadPart;
